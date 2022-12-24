@@ -2,6 +2,7 @@ import { Box } from "components/box/Box";
 import { FeedbackOptions } from "./FeedbackOptions";
 import { Statistics } from "components/statistics/Statistics";
 import styled from "styled-components";
+import { Notification } from "components/statistics/Notification";
 
 const { Component } = require("react");
 
@@ -35,20 +36,19 @@ export class Feedback extends Component {
     }
 
     countTotalFeedback = () => {
-        this.setState(({good,neutral,bad})=>{
-            return good + neutral + bad;
-        })
+        return Object.values(this.state).reduce((acc,state)=>{
+            return acc += state;
+        },0);
     }
 
     countPositivePercentage = () => {
-        this.setState((prevState)=>{
-            console.log(prevState.good)
-        })
+        const {good} = this.state;
+        return good/this.countTotalFeedback()*100;
     }
-
 
     render() {
         const { good, neutral, bad } = this.state;
+
         return (
             <>
                 <Box as={"section"}>
@@ -57,7 +57,7 @@ export class Feedback extends Component {
                 </Box>
                 <Box as={"section"}>
                     <TitleH2>Statistics</TitleH2>
-                    <Statistics good={good} neutral={neutral} bad={bad} total={good+neutral+bad}></Statistics>
+                    {this.countTotalFeedback() > 0 ? <Statistics good={good} neutral={neutral} bad={bad} total={this.countTotalFeedback()} positivePercentage={this.countPositivePercentage()}></Statistics> : <Box mt="7" mb="7" as={"section"}><Notification message="There is no feedback"></Notification></Box>}
                 </Box>
             </>
         )

@@ -14,12 +14,12 @@ const Paragraph = styled.p`
     border: none;
 `
 
-export const Statistics = ({ good, neutral, bad, total}) => {
-    return <Box width="600px" display="flex" flexDirection="column" justifyContent="center" alignItems="start" mt="4" mb="5" p="4">
+export const Statistics = ({ good, neutral, bad, total, positivePercentage}) => {
+    return <Box width="600px" display="flex" flexDirection="column" justifyContent="center" alignItems="start" mt="4" p="4">
         <Paragraph>Good: {good}</Paragraph>
         <Paragraph>Neutral: {neutral}</Paragraph>
         <Paragraph>Bad: {bad}</Paragraph>
         <Paragraph>Total: {total}</Paragraph>
-        <Paragraph>Positive Feedback: </Paragraph>
+        <Paragraph>Positive Feedback: {Math.round(positivePercentage)}%</Paragraph>
     </Box>
 }
