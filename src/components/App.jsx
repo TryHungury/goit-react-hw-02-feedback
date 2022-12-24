@@ -16,7 +16,7 @@ const Title = styled.h1`
 export const App = () => {
   return (
     <Box height= "100%"  display= "flex" flexDirection="column" justifyContent= "space-evenly" alignItems= "center" fontSize= "40px" backgroundColor="backgroundSecondary">
-      <Title>I want peace</Title>
+      <Title>Ukraine Win❤️</Title>
       <Feedback></Feedback>
     </Box>
   );
